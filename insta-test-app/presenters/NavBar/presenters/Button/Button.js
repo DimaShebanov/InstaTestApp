@@ -5,21 +5,20 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 class Button extends Component {
   render () {
     const iconSize = 40;
-    const { name, currentRoute, iconName } = this.props;
-    
-    const isDisabled = name === currentRoute;
-
+    const { name, currentRoute, iconName, onPress } = this.props;
     const { container } = styles;
     
+    const isDisabled = name === currentRoute;
     const finalStyles = {
         ...container,
-        ...styles[isDisabled ? 'inactive' : 'active']
+        ...isDisabled ? styles.inactive : {}
     };
-
+    
     return (
         <TouchableOpacity
             style = {finalStyles}
             disabled = {isDisabled}
+            onPress = {onPress}
         >
             <MaterialIcons
                 name = {iconName}
@@ -37,12 +36,10 @@ const styles = {
         alignItems : 'center',
         borderTopLeftRadius : 5,
         borderTopRightRadius : 5,
+        backgroundColor : '#ecf0f1'
     },
     inactive : {
-        backgroundColor : 'gray'
-    },
-    active : {
-        backgroundColor : 'white'
+        backgroundColor : '#7f8c8d'
     }
 }
 

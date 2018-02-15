@@ -1,3 +1,3 @@
-import Dashboard from './Dashboard';
+import Router from './Router';
 
-export default Dashboard;
+export default Router;

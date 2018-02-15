@@ -2,16 +2,20 @@ import { ADD_PHOTO } from '../actions/photos';
 
 
 const initialState = [
-    'some photo maybe?'
 ];
 
 export default (state = initialState, action) => {
-  
+    let ret = state;
     switch (action.type) {
         case ADD_PHOTO:
-            return [...state, action.payload];
-
-        default:
-            return state;
-  }
+            const lastID = state.length;
+            ret = [
+                ...state,
+                {
+                    uri : action.payload,
+                    id : lastID
+                }
+            ];
+    }
+    return ret;
 }

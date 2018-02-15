@@ -1,25 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, View, StatusBar, StyleSheet } from 'react-native'
-import Photos from './components/Photos';
-import NavBar from './presenters/NavBar';
+import Photos from '../../components/Photos';
+import NavBar from '../../presenters/NavBar';
 
 class Dashboard extends Component {
-    constructor(props) {
-      super(props)
-    
-        this.state = {
-            
-        }
-    }
-    
     render () {
         const { route } = this.props;
         const routes = {
             'photos' : () => (<Photos/>),
             // 'profile' : <Profile/>
         };
-        const curScreen = routes[route];
+        const curScreen = routes[route] || routes.photos;
         return (
             <View style = {styles.container}>
                 <StatusBar
@@ -35,7 +27,7 @@ class Dashboard extends Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#f2f2f2',
+      backgroundColor: '#95a5a6',
       alignItems: 'center',
       justifyContent: 'center',
     },
