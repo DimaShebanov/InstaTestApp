@@ -1,3 +1,6 @@
+// I TOOK THIS CODE FROM HERE https://github.com/expo/camerja
+
+
 import React from 'react';
 import { Image, StyleSheet, View, TouchableOpacity, Text, ScrollView } from 'react-native';
 import { FileSystem, FaceDetector } from 'expo';

@@ -1,3 +1,7 @@
+// I TOOK THIS CODE FROM HERE https://github.com/expo/camerja
+
+
+
 import { Constants, Camera, FileSystem, Permissions } from 'expo';
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Slider, Vibration } from 'react-native';

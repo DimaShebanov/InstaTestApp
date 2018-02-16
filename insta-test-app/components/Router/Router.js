@@ -1,25 +1,35 @@
+import {
+    Text,
+    View,
+    StatusBar,
+    StyleSheet,
+    KeyboardAvoidingView
+} from 'react-native';
+import NavBar from '../../presenters/NavBar';
+import Photos from '../../components/Photos';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, StatusBar, StyleSheet } from 'react-native'
-import Photos from '../../components/Photos';
-import NavBar from '../../presenters/NavBar';
+import Profile from '../Profile';
 
-class Dashboard extends Component {
+class Router extends Component {
     render () {
         const { route } = this.props;
         const routes = {
             'photos' : () => (<Photos/>),
-            // 'profile' : <Profile/>
+            'profile' : () =>( <Profile/>)
         };
-        const curScreen = routes[route] || routes.photos;
+        const CurScreen = routes[route] || routes.photos;
         return (
-            <View style = {styles.container}>
+            <KeyboardAvoidingView
+                style = {styles.container}
+                behavior = 'padding'
+            >
                 <StatusBar
                     hidden = {true}
                 />
-                {curScreen()}
+                <CurScreen/>
                 <NavBar/>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
@@ -39,4 +49,4 @@ export default connect(
         route: state.routing
     }),
     dispatch => ({})
-)(Dashboard);
+)(Router);

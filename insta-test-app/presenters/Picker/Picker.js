@@ -2,48 +2,54 @@ import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 
 class Picker extends Component {
-    constructor(props) {
-        super(props)
+    constructor (props) {
+        super(props);
 
         this.handleChoise = this.handleChoise.bind(this);
     }
 
-
     handleChoise = option => () => {
-        this.props.onChoose(option);
+        this.props.onChoose( option );
     }
 
-
     render() {
+        const {
+            cancelText,
+            container,
+            overlay,
+            option,
+            text
+        } = styles;
+
         return (
-        <View style = {styles.overlay}>
-            <View style = {styles.container}>
+        <View style = { overlay }>
+            <View style = { container }>
                 <TouchableOpacity
-                    style = {styles.option}
-                    onPress = {this.handleChoise('take')}
+                    style = { option }
+                    onPress = { this.handleChoise('take') }
                 >
                     <Text
-                        style = {styles.text}
+                        style = { text }
                     >
                         Take a photo
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style = {styles.option}
-                    onPress = {this.handleChoise('choose')}
+                    style = { option }
+                    onPress = { this.handleChoise('choose') }
                 >
                     <Text
-                        style = {styles.text}
+                        style = { text }
                     >
                         Choose photo from gallery
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style = {styles.option}
-                    onPress = {this.handleChoise('cancel')}
+                    style = { option }
+                    onPress = { this.handleChoise('cancel') }
                 >
                     <Text
-                        style = {{...styles.cancelText, ...styles.text}}
+                        style = { { ...cancelText, ...text } }
                     >
                         Cancel
                     </Text>

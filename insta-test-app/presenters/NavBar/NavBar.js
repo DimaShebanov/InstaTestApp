@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
+import { onGo } from '../../redux/actions/routing';
 import { Text, View } from 'react-native';
 import Button from './presenters/Button';
-import { onGo } from '../../redux/actions/routing';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 export class NavBar extends Component {
-    constructor(props) {
-      super(props)
+    constructor (props) {
+      super(props);
     
       this.handlePress = this.handlePress.bind(this);
     }
@@ -17,24 +17,25 @@ export class NavBar extends Component {
 
     render () {
         const { currentRoute } = this.props;
+
         return (
         <View
-            style = {styles.navContainer}
+            style = { styles.navContainer }
         >
             <Button
                 name = 'photos'
                 iconName = 'dashboard'
-                currentRoute = {currentRoute}
-                onPress = {this.handlePress('photos')}
+                currentRoute = { currentRoute }
+                onPress = { this.handlePress('photos') }
             />
             <Button
                 name = 'profile'
                 iconName = 'account-box'
-                currentRoute = {currentRoute}
-                onPress = {this.handlePress('profile')}
+                currentRoute = { currentRoute }
+                onPress = { this.handlePress('profile') }
             />
         </View>
-        )
+        );
     }
 }
 

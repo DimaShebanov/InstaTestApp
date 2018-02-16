@@ -1,36 +1,35 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { 
     View,
     StyleSheet,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
+    Text
 } from 'react-native';
-import { ImagePicker } from 'expo';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { addPhoto } from '../../redux/actions/photos';
 import Photo from './presenters/Photo/Photo';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Picker from '../../presenters/Picker';
 import Camera from '../../presenters/Camera';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { ImagePicker } from 'expo';
 
 class Photos extends Component {
-    constructor(props) {
-      super(props)
+    constructor (props) {
+      super(props);
     
       this.state = {
          isPickerShown : false,
          isCameraShown : false
-      }
+      };
 
-      this.handleUserChoise = this.handleUserChoise.bind(this);
       this.handleCapturePhoto = this.handleCapturePhoto.bind(this);
+      this.handleUserChoise = this.handleUserChoise.bind(this);
       this.togglePicker = this.togglePicker.bind(this);
       this.keyExtractor = this.keyExtractor.bind(this);
       this.toggleCamera = this.toggleCamera.bind(this);
       this.pickImage = this.pickImage.bind(this);
     }
-    
-
 
     togglePicker = () => {
         const isPickerShown = !this.state.isPickerShown;
@@ -73,40 +72,52 @@ class Photos extends Component {
     render() {
         const { photos } = this.props;
         const { isPickerShown, isCameraShown } = this.state;
+        const {
+            addButtonIcon,
+            addButton,
+            container,
+            camera,
+            header,
+            list
+        } = styles;
 
         const MyCamera = () => (
-            <View style = {styles.camera}>
-                <Camera onCapture = {this.handleCapturePhoto}/>
+            <View style = { camera }>
+                <Camera onCapture = { this.handleCapturePhoto }/>
             </View> 
-
         );
 
         const Button = () => (
             <TouchableOpacity
-                onPress={this.togglePicker}
-                style = {styles.addButton}
+                onPress = { this.togglePicker }
+                style = { addButton }
             >
                 <MaterialIcons
                     name = 'add'
-                    size = {40}
-                    style = {styles.addButtonIcon}
+                    size = { 40 }
+                    style = { addButtonIcon }
                 />
             </TouchableOpacity>
         );
 
         return (
-            <View style = {styles.container}>
+            <View style = { container }>
+                <Text
+                    style = { header }
+                >
+                    Photos
+                </Text>
                 { isCameraShown ? null : <Button/>}
                 { isCameraShown ? <MyCamera/> : null }
                 <FlatList
                     data = { photos }
                     renderItem = { Photo }
-                    style = {styles.list}
+                    style = { list }
                     keyExtractor = {this.keyExtractor}
                 />
-                { isPickerShown ? <Picker onChoose = {this.handleUserChoise}/> : null }
+                { isPickerShown ? <Picker onChoose = { this.handleUserChoise }/> : null }
             </View>
-        )
+        );
     }
 }
 
@@ -115,6 +126,11 @@ const styles = StyleSheet.create({
     container : {
         flex: 1,
         width : '100%',
+    },
+    header : {
+        textAlign : 'center',
+        padding: 10,
+        backgroundColor: '#7f8c8d'
     },
     addButton : {
         borderRadius : 50,
